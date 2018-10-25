@@ -1,4 +1,4 @@
-// rules for login
+// rules for education
 const isEmpty = require('./is-empty');
 const Validator = require('validator');
 
