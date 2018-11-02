@@ -6,7 +6,6 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-
     axios
         .post('/api/users/register', userData)
         .then(res => history.push('/login'))
@@ -46,5 +45,15 @@ export const setCurrentUser = (decoded) => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
-    }
-}
+    };
+};
+
+// Log user out
+export const logoutUser = () => dispatch => {
+    // Remove the token from local storage
+    localStorage.removeItem('jwtToken');
+    //Remove auth header for future requests
+    setAuthToken(false);
+    // Set current User to {} which will also set isAuthenticated to false
+    dispatch(setCurrentUser({}));
+};
