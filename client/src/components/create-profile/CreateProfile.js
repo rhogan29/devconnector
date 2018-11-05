@@ -40,7 +40,56 @@ class CreateProfile extends Component {
 
     render() {
 
-        const { errors } = this.state;
+        const { errors, displaySocialInputs } = this.state;
+
+        let socialInputs;
+
+        if (displaySocialInputs) {
+            socialInputs = (
+                <div>
+                    <InputGroup 
+                    placeholder="Twitter Profile URL"
+                    name="twitter"
+                    icon="fab fa-twitter"
+                    value={this.state.twitter}
+                    onChange={this.onChange}
+                    error={errors.twitter}
+                    />
+                    <InputGroup 
+                    placeholder="Facebook Profile URL"
+                    name="facebook"
+                    icon="fab fa-facebook"
+                    value={this.state.facebook}
+                    onChange={this.onChange}
+                    error={errors.facebook}
+                    />
+                    <InputGroup 
+                    placeholder="Linkedin Profile URL"
+                    name="linkedin"
+                    icon="fab fa-linkedin"
+                    value={this.state.linkedin}
+                    onChange={this.onChange}
+                    error={errors.linkedin}
+                    />
+                    <InputGroup 
+                    placeholder="Youtube channel URL"
+                    name="youtube"
+                    icon="fab fa-youtube"
+                    value={this.state.youtube}
+                    onChange={this.onChange}
+                    error={errors.youtube}
+                    />
+                    <InputGroup 
+                    placeholder="Instagram page URL"
+                    name="instagram"
+                    icon="fab fa-instagram"
+                    value={this.state.instagram}
+                    onChange={this.onChange}
+                    error={errors.instagram}
+                    />
+                </div>
+            )
+        }
 
         // Select options for status
         const options = [
@@ -64,7 +113,7 @@ class CreateProfile extends Component {
         return (
             <div className="create-profile">
                 <div className="container">
-                    <div classname="row">
+                    <div className="row">
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Create your profile</h1>
                             <p className="lead text-center">
@@ -110,7 +159,7 @@ class CreateProfile extends Component {
                                 <TextFieldGroup
                                     placeholder="Location"
                                     name="location"
-                                    value={this.state.clocation}
+                                    value={this.state.location}
                                     onChange={this.onChange}
                                     error={errors.location}
                                     info="City or city & state suggested (eg. Boston, MA)"
@@ -147,6 +196,21 @@ class CreateProfile extends Component {
                                     error={errors.bio}
                                     info="Tell us a little about yourself"
                                 />
+
+                                <div className="mb-3">
+                                    <button onClick={() => {
+                                        this.setState(prevState => ({
+                                            displaySocialInputs: !prevState.displaySocialInputs
+                                        }))
+                                    }} className="btn btn-light">
+
+                                    Add Social Network Links
+                                    </button>
+                                    <span className="text-muted">Optional</span>
+                                </div>
+                                {socialInputs}
+
+                                <input type="submit" value="Submit" className="btn btn-info btn-block"></input>
                             </form>
                         </div>
                     </div>
